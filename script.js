@@ -130,7 +130,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 
   const updateTrack = () => {
     const cardWidth = cards[0].offsetWidth + 16;
-    const moveX = (current * cardWidth) + 90;
+    const moveX = (current * cardWidth) + 100;
   track.style.transform = `translateX(-${moveX}px)`;
   };
 
