@@ -140,7 +140,6 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   if (prevBtn) prevBtn.addEventListener('click', () => { current = Math.max(current - 1, 0); updateTrack(); });
   window.addEventListener('resize', () => { current = Math.min(current, maxIndex()); updateTrack(); }, { passive: true });
 
-  /* Zoom preview */
   const preview    = document.getElementById('zoomPreview');
   const previewImg = document.getElementById('zoomPreviewImg');
   if (!preview || !previewImg) return;
@@ -167,7 +166,6 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   function positionPreview(e) {
     let x = e.clientX + OFFSET_X;
     let y = e.clientY + OFFSET_Y;
-    /* keep inside viewport */
     x = Math.min(x, window.innerWidth  - 340);
     y = Math.max(y, 10);
     preview.style.left = x + 'px';
