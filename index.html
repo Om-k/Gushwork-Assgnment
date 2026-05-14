@@ -8,6 +8,73 @@
   </head>
 
   <body>
+    <header class="site-header" id="siteHeader">
+      <div class="container">
+        <div class="header-inner">
+          <a href="#" class="header-logo">
+            <img
+              src="./Assets/logo.png"
+              alt="Mangalam HDPE Pipes"
+              class="header-logo-img"
+            />
+          </a>
+          <nav class="header-nav">
+            <a href="#" class="nav-link">About Us</a>
+            <div class="nav-dropdown">
+              <a href="#" class="nav-link nav-link--dropdown"
+                >Products
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </a>
+              <div class="dropdown-menu">
+                <a href="#">HDPE Pipes</a>
+                <a href="#">HDPE Fittings</a>
+                <a href="#">PE-RT Heating Pipes</a>
+              </div>
+            </div>
+            <a href="#" class="btn-primary">Contact Us</a>
+          </nav>
+          <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#">About Us</a>
+        <a href="#">Products</a>
+        <a href="#" class="btn-primary">Contact Us</a>
+      </div>
+    </header>
+
+    <div class="product-sticky" id="productSticky" aria-hidden="true">
+      <div class="container">
+        <div class="product-sticky-inner">
+          <img
+            src="./Assets/product-thumb.png"
+            alt=""
+            class="product-sticky-thumb"
+          />
+          <div class="product-sticky-info">
+            <p class="product-sticky-title">
+              Premium HDPE Pipes &amp; Coils for Modern Infrastructure
+            </p>
+            <p class="product-sticky-price">₹4,80,000 – 7,90,000</p>
+          </div>
+          <button class="btn-primary product-sticky-cta">
+            Get Custom Quote
+          </button>
+        </div>
+      </div>
+    </div>
+
     <main>
       <!-- ══════════════════════════════════════
         HERO
@@ -23,7 +90,7 @@
           <div class="hero-section-1">
             <!-- LEFT: Carousel -->
             <div class="hero-carousel">
-              <div class="carousel-main shadow-md">
+              <div class="carousel-main shadow-md" id="heroCarouselMain">
                 <button class="carousel-arrow carousel-arrow--left">
                   &#8592;
                 </button>
@@ -31,11 +98,14 @@
                   src="./Assets/product-thumb.png"
                   class="carousel-img image"
                   alt="Product image"
+                  id="heroMainImg"
                 />
+                <div class="zoom-lens" id="zoomLens"></div>
                 <button class="carousel-arrow carousel-arrow--right">
                   &#8594;
                 </button>
               </div>
+              <div class="zoom-result" id="zoomResult"></div>
               <div class="carousel-cards">
                 <div class="carousel-card"></div>
                 <div class="carousel-card"></div>
@@ -123,24 +193,46 @@
             </div>
           </div>
 
-              <!-- ══════════════════════════════════════
+          <!-- ══════════════════════════════════════
          TRUST BAR
     ══════════════════════════════════════ -->
-    <div class="trust-bar">
-  <p class="trust-label">Trusted by Hundreds of Companies Globally</p>
-  <div class="trust-logos">
-    <img src="./Assets/euroflex.png" alt="Euroflex" class="trust-logo-img" />
-    <img src="./Assets/euroflex.png" alt="Euroflex" class="trust-logo-img" />
-    <img src="./Assets/euroflex.png" alt="Euroflex" class="trust-logo-img" />
-    <img src="./Assets/euroflex.png" alt="Euroflex" class="trust-logo-img" />
-    <img src="./Assets/euroflex.png" alt="Euroflex" class="trust-logo-img" />
-    <img src="./Assets/euroflex.png" alt="Euroflex" class="trust-logo-img" />
-  </div>
-</div>
+          <div class="trust-bar">
+            <p class="trust-label">Trusted by Hundreds of Companies Globally</p>
+            <div class="trust-logos">
+              <img
+                src="./Assets/euroflex.png"
+                alt="Euroflex"
+                class="trust-logo-img"
+              />
+              <img
+                src="./Assets/euroflex.png"
+                alt="Euroflex"
+                class="trust-logo-img"
+              />
+              <img
+                src="./Assets/euroflex.png"
+                alt="Euroflex"
+                class="trust-logo-img"
+              />
+              <img
+                src="./Assets/euroflex.png"
+                alt="Euroflex"
+                class="trust-logo-img"
+              />
+              <img
+                src="./Assets/euroflex.png"
+                alt="Euroflex"
+                class="trust-logo-img"
+              />
+              <img
+                src="./Assets/euroflex.png"
+                alt="Euroflex"
+                class="trust-logo-img"
+              />
+            </div>
+          </div>
         </div>
       </section>
-
-
 
       <!-- ══════════════════════════════════════
         TECH SPECS
@@ -422,12 +514,15 @@
                 </svg>
               </button>
               <div class="faq-answer">
-                <p class="body-small">
-                  HDPE pipes are designed to convey various types of fluids with
-                  precision, allowing for corrosion-free flow in demanding
-                  environments. They are essential in water distribution,
-                  irrigation, and industrial fluid management processes.
-                </p>
+                <div class="faq-answer-inner">
+                  <p class="body-small">
+                    HDPE pipes are designed to convey various types of fluids
+                    with precision, allowing for corrosion-free flow in
+                    demanding environments. They are essential in water
+                    distribution, irrigation, and industrial fluid management
+                    processes.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -447,12 +542,14 @@
                 </svg>
               </button>
               <div class="faq-answer">
-                <p class="body-small">
-                  HDPE pipes offer exceptional chemical resistance, flexibility,
-                  50+ year service life, leak-proof fusion joints, and
-                  significantly lower lifetime costs compared to metal or
-                  concrete alternatives.
-                </p>
+                <div class="faq-answer-inner">
+                  <p class="body-small">
+                    HDPE pipes offer exceptional chemical resistance,
+                    flexibility, 50+ year service life, leak-proof fusion
+                    joints, and significantly lower lifetime costs compared to
+                    metal or concrete alternatives.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -472,12 +569,14 @@
                 </svg>
               </button>
               <div class="faq-answer">
-                <p class="body-small">
-                  HDPE pipes are produced through a precision extrusion process
-                  — PE100 grade resin is melted, extruded through a die, cooled
-                  in vacuum sizing tanks, tested for quality, marked, cut to
-                  length, and packaged for dispatch.
-                </p>
+                <div class="faq-answer-inner">
+                  <p class="body-small">
+                    HDPE pipes are produced through a precision extrusion
+                    process — PE100 grade resin is melted, extruded through a
+                    die, cooled in vacuum sizing tanks, tested for quality,
+                    marked, cut to length, and packaged for dispatch.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -497,12 +596,14 @@
                 </svg>
               </button>
               <div class="faq-answer">
-                <p class="body-small">
-                  HDPE pipes are widely used in municipal water supply,
-                  agricultural irrigation, natural gas distribution, mining
-                  slurry lines, sewage and drainage systems, and
-                  telecommunications cable ducting.
-                </p>
+                <div class="faq-answer-inner">
+                  <p class="body-small">
+                    HDPE pipes are widely used in municipal water supply,
+                    agricultural irrigation, natural gas distribution, mining
+                    slurry lines, sewage and drainage systems, and
+                    telecommunications cable ducting.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -522,12 +623,15 @@
                 </svg>
               </button>
               <div class="faq-answer">
-                <p class="body-small">
-                  Yes. We offer custom diameters, pressure ratings, SDR values,
-                  coil lengths, and special formulations (UV stabilised,
-                  anti-static, etc.) tailored to your project specifications.
-                  Contact our technical team for a custom quote.
-                </p>
+                <div class="faq-answer-inner">
+                  <p class="body-small">
+                    Yes. We offer custom diameters, pressure ratings, SDR
+                    values, coil lengths, and special formulations (UV
+                    stabilised, anti-static, etc.) tailored to your project
+                    specifications. Contact our technical team for a custom
+                    quote.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -535,9 +639,7 @@
           <!-- Email catalogue CTA -->
           <div class="faq-email-cta">
             <div>
-              <h4>
-                Want us to email the entire catalogue?
-              </h4>
+              <h4>Want us to email the entire catalogue?</h4>
               <p class="body-small">
                 Enter your email and we'll share the catalogue with you.
               </p>
@@ -554,26 +656,30 @@
         </div>
       </section>
 
-          <!-- ══════════════════════════════════════
+      <!-- ══════════════════════════════════════
         APPLICATIONS
     ══════════════════════════════════════ -->
-      <section class="fold applications-section">
-        <div class="container">
-          <div class="applications-header">
-            <div>
-              <h2>Versatile Applications Across Industries</h2>
-              <p class="body-large applications-subtext">
-                From technical textiles to packaging materials, our
-                precision-engineered pipes deliver superior performance across
-                diverse applications.
-              </p>
-            </div>
-            <div class="applications-nav">
-              <button class="app-nav-btn" id="appPrev">&#8592;</button>
-              <button class="app-nav-btn" id="appNext">&#8594;</button>
+      <section>
+        <div class="fold applications-section">
+          <div class="container">
+            <div class="applications-header">
+              <div>
+                <h2>Versatile Applications Across Industries</h2>
+                <p class="body-large applications-subtext">
+                  From technical textiles to packaging materials, our
+                  precision-engineered pipes deliver superior performance across
+                  diverse applications.
+                </p>
+              </div>
+              <div class="applications-nav">
+                <button class="app-nav-btn" id="appPrev">&#8592;</button>
+                <button class="app-nav-btn" id="appNext">&#8594;</button>
+              </div>
             </div>
           </div>
+        </div>
 
+        <div class="container-fullscreen">
           <div class="applications-track-wrapper">
             <div class="applications-track" id="applicationsTrack">
               <!-- Card 1 -->
@@ -586,7 +692,9 @@
                 <div class="app-card-overlay">
                   <h5>Fishnet Manufacturing</h5>
                   <p class="body-small">
-                   High-performance twisting solutions for packaging yarn, strapping materials, and reinforcement threads used in modern packaging applications.
+                    High-performance twisting solutions for packaging yarn,
+                    strapping materials, and reinforcement threads used in
+                    modern packaging applications.
                   </p>
                 </div>
               </div>
@@ -600,12 +708,14 @@
                 <div class="app-card-overlay">
                   <h5>Fishnet Manufacturing</h5>
                   <p class="body-small">
-                   High-performance twisting solutions for packaging yarn, strapping materials, and reinforcement threads used in modern packaging applications.
+                    High-performance twisting solutions for packaging yarn,
+                    strapping materials, and reinforcement threads used in
+                    modern packaging applications.
                   </p>
                 </div>
               </div>
               <!-- Card 3 -->
-             <div class="app-card">
+              <div class="app-card">
                 <img
                   src="./Assets/process-raw-material.png"
                   alt="Water Supply"
@@ -614,7 +724,9 @@
                 <div class="app-card-overlay">
                   <h5>Fishnet Manufacturing</h5>
                   <p class="body-small">
-                   High-performance twisting solutions for packaging yarn, strapping materials, and reinforcement threads used in modern packaging applications.
+                    High-performance twisting solutions for packaging yarn,
+                    strapping materials, and reinforcement threads used in
+                    modern packaging applications.
                   </p>
                 </div>
               </div>
@@ -628,7 +740,9 @@
                 <div class="app-card-overlay">
                   <h5>Fishnet Manufacturing</h5>
                   <p class="body-small">
-                   High-performance twisting solutions for packaging yarn, strapping materials, and reinforcement threads used in modern packaging applications.
+                    High-performance twisting solutions for packaging yarn,
+                    strapping materials, and reinforcement threads used in
+                    modern packaging applications.
                   </p>
                 </div>
               </div>
@@ -642,7 +756,9 @@
                 <div class="app-card-overlay">
                   <h5>Fishnet Manufacturing</h5>
                   <p class="body-small">
-                   High-performance twisting solutions for packaging yarn, strapping materials, and reinforcement threads used in modern packaging applications.
+                    High-performance twisting solutions for packaging yarn,
+                    strapping materials, and reinforcement threads used in
+                    modern packaging applications.
                   </p>
                 </div>
               </div>
@@ -656,10 +772,11 @@
                 <div class="app-card-overlay">
                   <h5>Fishnet Manufacturing</h5>
                   <p class="body-small">
-                   High-performance twisting solutions for packaging yarn, strapping materials, and reinforcement threads used in modern packaging applications.
+                    High-performance twisting solutions for packaging yarn,
+                    strapping materials, and reinforcement threads used in
+                    modern packaging applications.
                   </p>
                 </div>
-              </div>
               </div>
             </div>
           </div>
@@ -1239,20 +1356,24 @@
         </div>
       </section>
 
-
       <!-- ══════════════════════════════════════
         TESTIMONIALS
     ══════════════════════════════════════ -->
-      <section class="fold testimonials-section">
-        <div class="container">
-          <h2 class="testimonials-heading">
-            Trusted Performance. Proven Results.
-          </h2>
-          <p class="body-large testimonials-subtext">
-            From innovative piping solutions to specialised fittings, we deliver
-            complete infrastructure systems trusted by clients worldwide.
-          </p>
+      <section>
+        <div class="fold testimonials-section">
+          <div class="container">
+            <h2 class="testimonials-heading">
+              Trusted Performance. Proven Results.
+            </h2>
+            <p class="body-large testimonials-subtext">
+              From innovative piping solutions to specialised fittings, we
+              deliver complete infrastructure systems trusted by clients
+              worldwide.
+            </p>
+          </div>
+        </div>
 
+        <div class="container-fullscreen">
           <div class="testimonials-track-wrapper">
             <div class="testimonials-track" id="testimonialsTrack">
               <div class="testimonial-card">
@@ -1541,24 +1662,31 @@
       </section>
     </main>
 
-  <!-- ══════════════════════════════════════
+    <!-- ══════════════════════════════════════
          FOOTER
     ══════════════════════════════════════ -->
     <footer class="site-footer">
-      <div class="container" style="padding-top: 56px; padding-bottom: 32px;">
-
+      <div class="container" style="padding-top: 56px; padding-bottom: 32px">
         <div class="footer-brand-card">
           <div class="footer-logo-wrap">
-            <img src="./Assets/logo.png" alt="Mangalam HDPE Pipes" class="footer-logo"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div class="footer-logo-placeholder" style="display:none;">
+            <img
+              src="./Assets/logo.png"
+              alt="Mangalam HDPE Pipes"
+              class="footer-logo"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+              "
+            />
+            <div class="footer-logo-placeholder" style="display: none">
               <span class="logo-wordmark">Mangalam</span>
               <span class="logo-sub">HDPE&nbsp;|&nbsp;Pipes</span>
             </div>
           </div>
           <div class="footer-divider"></div>
           <p class="footer-tagline-text">
-            Premium <span class="text-highlight">HDPE Pipes &amp; Fittings</span><br />
+            Premium <span class="text-highlight">HDPE Pipes &amp; Fittings</span
+            ><br />
             Manufacturer <span class="text-highlight">in South India</span>
           </p>
         </div>
@@ -1595,63 +1723,175 @@
             <p class="footer-col-title">Contact</p>
             <ul class="footer-contact-list">
               <li>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
                 </svg>
                 2125, Road No. 2, GIDC Sachin, Surat – 394 230, Gujarat, India
               </li>
               <li>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.58-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.58-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"
+                  />
                 </svg>
                 +91-XXX-XXX-XXXX
               </li>
               <li>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  />
+                  <polyline points="22,6 12,13 2,6" />
                 </svg>
                 info@meeraind.com
               </li>
               <li>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  />
+                  <polyline points="22,6 12,13 2,6" />
                 </svg>
                 support@meeraind.com
               </li>
             </ul>
             <div class="footer-socials">
               <a href="#" class="social-icon" aria-label="LinkedIn">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-                  <circle cx="4" cy="4" r="2"/>
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
+                  />
+                  <circle cx="4" cy="4" r="2" />
                 </svg>
               </a>
               <a href="#" class="social-icon" aria-label="X / Twitter">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                  />
                 </svg>
               </a>
               <a href="#" class="social-icon" aria-label="Instagram">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                 </svg>
               </a>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
-          <p class="footer-copyright">Copyright &copy; 2025 Meera Industries Limited&nbsp;|&nbsp;All Rights Reserved</p>
+          <p class="footer-copyright">
+            Copyright &copy; 2025 Meera Industries Limited&nbsp;|&nbsp;All
+            Rights Reserved
+          </p>
           <div class="footer-legal">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
             <a href="#">Sitemap</a>
           </div>
         </div>
-
       </div>
     </footer>
+
+    <div class="zoom-preview" id="zoomPreview" aria-hidden="true">
+      <img src="" alt="Zoomed view" id="zoomPreviewImg" />
+    </div>
+
+    <div class="modal-overlay" id="quoteModal" aria-hidden="true">
+      <div class="modal" role="dialog" aria-labelledby="quoteModalTitle">
+        <div class="modal-header">
+          <h4 id="quoteModalTitle">Let us email the entire catalogue to you</h4>
+          <button class="modal-close" id="quoteModalClose" aria-label="Close">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <form class="modal-form" id="quoteModalForm">
+          <label class="modal-field">
+            <span class="modal-label"
+              >Your Email <span class="required">*</span></span
+            >
+            <input type="email" placeholder="example@gmail.com" required />
+          </label>
+          <label class="modal-field">
+            <span class="modal-label"
+              >Your Contact <span class="optional">(Optional)</span></span
+            >
+            <input type="tel" placeholder="+91-0000000000" />
+          </label>
+          <div class="modal-actions">
+            <button type="submit" class="btn-primary">Download Brochure</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
