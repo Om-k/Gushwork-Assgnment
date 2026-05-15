@@ -2,9 +2,9 @@
    QUOTE / CATALOGUE MODAL
 ══════════════════════════════════════ */
 (function () {
-  const modal      = document.getElementById('quoteModal');
-  const closeBtn   = document.getElementById('quoteModalClose');
-  const form       = document.getElementById('quoteModalForm');
+  const modal    = document.getElementById('quoteModal');
+  const closeBtn = document.getElementById('quoteModalClose');
+  const form     = document.getElementById('quoteModalForm');
   if (!modal) return;
 
   const triggers = Array.from(document.querySelectorAll('button')).filter(b => {
@@ -15,16 +15,8 @@
         || t === 'request catalogue';
   });
 
-  const open  = () => {
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  };
-  const close = () => {
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  };
+  const open  = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; };
+  const close = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; };
 
   triggers.forEach(t => t.addEventListener('click', e => { e.preventDefault(); open(); }));
   closeBtn.addEventListener('click', close);
@@ -75,40 +67,137 @@
 })();
 
 /* ══════════════════════════════════════
-   PROCESS TABS
+   HERO CAROUSEL — image switching + arrows
 ══════════════════════════════════════ */
-document.querySelectorAll('.process-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    const idx = tab.dataset.tab;
-    document.querySelectorAll('.process-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.process-panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.querySelector(`.process-panel[data-panel="${idx}"]`).classList.add('active');
+(function () {
+  const mainImg     = document.getElementById('heroMainImg');
+  const cards       = document.querySelectorAll('.carousel-card');
+  const arrowLeft   = document.querySelector('#heroCarouselMain .carousel-arrow--left');
+  const arrowRight  = document.querySelector('#heroCarouselMain .carousel-arrow--right');
+  if (!mainImg || !cards.length) return;
+
+  /* Each card carries the image it should show, set via data-src */
+  let current = 0;
+
+  const goTo = (idx) => {
+    current = (idx + cards.length) % cards.length;
+    cards.forEach((c, i) => c.style.borderColor = i === current ? 'var(--primary-btn)' : 'transparent');
+    const src = cards[current].dataset.src;
+    if (src) {
+      mainImg.style.opacity = '0';
+      setTimeout(() => { mainImg.src = src; mainImg.style.opacity = '1'; }, 150);
+    }
+  };
+
+  /* Inject images into cards */
+  const images = [
+    './Assets/product-thumb.png',
+    './Assets/portfolio-fittings.png',
+    './Assets/portfolio-installation.png',
+    './Assets/portfolio-fittings.png',
+  ];
+  cards.forEach((card, i) => {
+    const img = images[i % images.length];
+    card.dataset.src = img;
+    card.style.backgroundImage  = `url('${img}')`;
+    card.style.backgroundSize   = 'cover';
+    card.style.backgroundPosition = 'center';
+    card.addEventListener('click', () => goTo(i));
   });
-});
+
+  /* Initialise first card */
+  goTo(0);
+
+  if (arrowLeft)  arrowLeft.addEventListener('click',  () => goTo(current - 1));
+  if (arrowRight) arrowRight.addEventListener('click', () => goTo(current + 1));
+
+  /* smooth opacity transition */
+  mainImg.style.transition = 'opacity 0.15s ease';
+})();
 
 /* ══════════════════════════════════════
-   FAQ ACCORDION
+   PROCESS TABS + PANEL ARROWS
 ══════════════════════════════════════ */
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item     = btn.closest('.faq-item');
-    const isActive = item.classList.contains('active');
+(function () {
+  const tabs   = Array.from(document.querySelectorAll('.process-tab'));
+  const panels = Array.from(document.querySelectorAll('.process-panel'));
+  if (!tabs.length) return;
 
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-    if (!isActive) item.classList.add('active');
+  const goToTab = (idx) => {
+    // wrap around
+    idx = (idx + tabs.length) % tabs.length;
 
-    document.querySelectorAll('.faq-item').forEach(i => {
-      const icon = i.querySelector('.faq-icon path');
-      if (icon) {
-        icon.setAttribute('d', i.classList.contains('active') ? 'M18 15l-6-6-6 6' : 'M6 9l6 6 6-6');
+    tabs.forEach(t => t.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+
+    tabs[idx].classList.add('active');
+    panels[idx].classList.add('active');
+
+    tabs[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+    return idx;
+  };
+
+  let current = 0;
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => { current = goToTab(i); });
+  });
+
+  panels.forEach((panel) => {
+    const left  = panel.querySelector('.carousel-arrow--left');
+    const right = panel.querySelector('.carousel-arrow--right');
+    if (left)  left.addEventListener('click',  () => { current = goToTab(current - 1); });
+    if (right) right.addEventListener('click', () => { current = goToTab(current + 1); });
+  });
+})();
+
+/* ══════════════════════════════════════
+   FAQ ACCORDION — no layout shift
+══════════════════════════════════════ */
+(function () {
+  /* Measure each answer's natural height once, then animate max-height */
+  const items = document.querySelectorAll('.faq-item');
+
+  items.forEach(item => {
+    const inner  = item.querySelector('.faq-answer-inner');
+    const answer = item.querySelector('.faq-answer');
+    const btn    = item.querySelector('.faq-question');
+    if (!inner || !answer || !btn) return;
+
+    /* Use max-height animation instead of grid rows — more reliable cross-browser */
+    answer.style.overflow   = 'hidden';
+    answer.style.transition = 'max-height 0.32s ease';
+    answer.style.display    = 'block';
+
+    /* Seed open item */
+    if (item.classList.contains('active')) {
+      answer.style.maxHeight = inner.scrollHeight + 32 + 'px';
+    } else {
+      answer.style.maxHeight = '0px';
+    }
+
+    btn.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+
+      /* Close all */
+      items.forEach(i => {
+        i.classList.remove('active');
+        const a = i.querySelector('.faq-answer');
+        if (a) a.style.maxHeight = '0px';
+      });
+
+      /* Open clicked if it was closed */
+      if (!isActive) {
+        item.classList.add('active');
+        answer.style.maxHeight = inner.scrollHeight + 32 + 'px';
       }
     });
   });
-});
+})();
 
 /* ══════════════════════════════════════
-   APPLICATIONS CAROUSEL + ZOOM PREVIEW
+   APPLICATIONS CAROUSEL (no zoom preview)
 ══════════════════════════════════════ */
 (function () {
   const track   = document.getElementById('applicationsTrack');
@@ -130,61 +219,19 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 
   const updateTrack = () => {
     const cardWidth = cards[0].offsetWidth + 16;
-    const moveX = (current * cardWidth) + 100;
-  track.style.transform = `translateX(-${moveX}px)`;
+    const moveX = current * cardWidth;
+    track.style.transform = `translateX(-${moveX}px)`;
   };
-
-  current = Math.max(current - 1, 0); updateTrack();
 
   if (nextBtn) nextBtn.addEventListener('click', () => { current = Math.min(current + 1, maxIndex()); updateTrack(); });
   if (prevBtn) prevBtn.addEventListener('click', () => { current = Math.max(current - 1, 0); updateTrack(); });
   window.addEventListener('resize', () => { current = Math.min(current, maxIndex()); updateTrack(); }, { passive: true });
-
-  const preview    = document.getElementById('zoomPreview');
-  const previewImg = document.getElementById('zoomPreviewImg');
-  if (!preview || !previewImg) return;
-
-  const OFFSET_X = 20;
-  const OFFSET_Y = -260;
-
-  cards.forEach(card => {
-    const img = card.querySelector('.app-card-img');
-
-    card.addEventListener('mouseenter', e => {
-      if (img) previewImg.src = img.src;
-      preview.classList.add('visible');
-      positionPreview(e);
-    });
-
-    card.addEventListener('mousemove', positionPreview);
-
-    card.addEventListener('mouseleave', () => {
-      preview.classList.remove('visible');
-    });
-  });
-
-  function positionPreview(e) {
-    let x = e.clientX + OFFSET_X;
-    let y = e.clientY + OFFSET_Y;
-    x = Math.min(x, window.innerWidth  - 340);
-    y = Math.max(y, 10);
-    preview.style.left = x + 'px';
-    preview.style.top  = y + 'px';
-  }
 })();
 
 /* ══════════════════════════════════════
-   HERO CAROUSEL + MAGNIFIER ZOOM
+   HERO IMAGE MAGNIFIER ZOOM
 ══════════════════════════════════════ */
 (function () {
-  const carouselCards = document.querySelectorAll('.carousel-card');
-  carouselCards.forEach(card => {
-    card.addEventListener('click', () => {
-      carouselCards.forEach(c => c.style.borderColor = 'transparent');
-      card.style.borderColor = 'var(--primary-btn)';
-    });
-  });
-
   const wrap      = document.getElementById('heroCarouselMain');
   const img       = document.getElementById('heroMainImg');
   const lens      = document.getElementById('zoomLens');
@@ -193,39 +240,26 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 
   const ZOOM = 2.5;
 
+  const setResultBg = () => { result.style.backgroundImage = `url('${img.src}')`; };
   img.addEventListener('load', setResultBg);
   setResultBg();
 
-  function setResultBg() {
-    result.style.backgroundImage = `url('${img.src}')`;
-  }
-
   wrap.addEventListener('mouseenter', () => result.classList.add('active'));
-  wrap.addEventListener('mouseleave', () => {
-    result.classList.remove('active');
-    lens.style.display = 'none';
-  });
+  wrap.addEventListener('mouseleave', () => { result.classList.remove('active'); lens.style.display = 'none'; });
 
   wrap.addEventListener('mousemove', e => {
     const rect = img.getBoundingClientRect();
-    const lw   = lens.offsetWidth;
-    const lh   = lens.offsetHeight;
-
+    const lw = lens.offsetWidth, lh = lens.offsetHeight;
     let x = e.clientX - rect.left - lw / 2;
     let y = e.clientY - rect.top  - lh / 2;
     x = Math.max(0, Math.min(x, rect.width  - lw));
     y = Math.max(0, Math.min(y, rect.height - lh));
-
     lens.style.left    = x + 'px';
     lens.style.top     = y + 'px';
     lens.style.display = 'block';
-
     result.style.backgroundSize     = `${rect.width * ZOOM}px ${rect.height * ZOOM}px`;
     result.style.backgroundPosition = `-${x * ZOOM}px -${y * ZOOM}px`;
-
-    /* position result panel to the right of cursor, keep in viewport */
-    let rx = e.clientX + 24;
-    let ry = e.clientY - 130;
+    let rx = e.clientX + 24, ry = e.clientY - 130;
     if (rx + 340 > window.innerWidth)  rx = e.clientX - 364;
     if (ry < 0)                        ry = 0;
     if (ry + 260 > window.innerHeight) ry = window.innerHeight - 260;
